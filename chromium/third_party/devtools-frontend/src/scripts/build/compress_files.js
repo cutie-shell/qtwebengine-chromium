@@ -75,7 +75,16 @@ async function main(argv) {
   const fileList = argv[fileListPosition + 1];
   const fileListContents = await readTextFile(fileList);
   const files = fileListContents.split(' ');
-  await Promise.all(files.map(filename => filename.trim()).map(compressFile));
+  for (let i = 0; i < files.length; i++) {
+    const fileName = files[i].trim();
+    try {
+      await compressFile(fileName);
+    } catch (e) {
+      console.log('Failing compressing',  fileName);
+      console.log(e);
+      process.exit(1);
+    }
+  }
 }
 
 main(process.argv).catch(err => {

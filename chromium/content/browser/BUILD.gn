@@ -2526,7 +2526,6 @@ jumbo_source_set("browser") {
   if (!is_android) {
     deps += [
       "//components/vector_icons",
-      "//content/browser/tracing:resources",
     ]
     sources += [
       # Non-Android platforms that don't presently support
